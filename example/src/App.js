@@ -1,10 +1,13 @@
 import React from 'react'
-
-import { ExampleComponent } from 'nomadic-editables'
+import { Editable } from 'nomadic-editables'
 import 'nomadic-editables/dist/index.css'
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  return (
+    <Editable>
+      <h1>hihihi</h1>
+    </Editable>
+  )
 }
 
 export default App
