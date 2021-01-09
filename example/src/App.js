@@ -1,12 +1,18 @@
 import React from 'react'
-import { Editable } from 'nomadic-editables'
-import 'nomadic-editables/dist/index.css'
+import {
+  Editable,
+  EditablesProvider,
+  PlainTextEditor
+} from 'nomadic-editables'
+// import 'nomadic-editables/dist/index.css'
 
 const App = () => {
   return (
-    <Editable>
-      <h1>hihihi</h1>
-    </Editable>
+    <EditablesProvider showEditingControls={true}>
+      <Editable Editor={PlainTextEditor}>
+        <h1>hihihi</h1>
+      </Editable>
+    </EditablesProvider>
   )
 }
 

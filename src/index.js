@@ -1,8 +1,12 @@
 import React from 'react'
-import styles from './styles.module.css'
 import Editable from './common/Editable'
-
+import PlainTextEditor from './editingTools/PlainTextEditor'
+import { EditablesContext, EditablesProvider, useEditables } from './common/EditablesContext'
 
 export {
-  Editable
+  Editable,
+  EditablesContext,
+  EditablesProvider,
+  useEditables,
+  PlainTextEditor
 }
