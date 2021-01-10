@@ -2,12 +2,13 @@ import React, { createContext, useContext } from "react";
 
 export const theme = {
   primaryColor: "#FF6C45", // orange
+  secondaryColor: 'black',
   lightColor: "#E5E5E5", // light grey
-  fontFamily: "sans-serif",
+  fontFamily: "Space Mono, mono",
   fontSize: 14,
   editContainer: {
     backgroundColor: "rgba(255,255,255,0.3)",
-    outline: "1px dashed rgba(0,0,0,0.5)",
+    outline: "2px dashed #FF6C45",
     position: "relative",
     cursor: "pointer",
     margin: '1px',
@@ -36,19 +37,19 @@ export const theme = {
     border: "1px solid #000",
     color: "black",
     backgroundColor: "#fff",
-    height: "18px",
-    width: "18px",
+    height: "20px",
+    width: "20px",
+    padding: "2px",
     borderRadius: "30px",
     cursor: "pointer",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    fontFamily: "Space Mono, mono",
+    fontSize: "18px",
     "&:hover": {
       backgroundColor: "#eee"
     }
-  },
-  icon: {
-    fontSize: "14px"
   }
 };
 
@@ -56,7 +57,7 @@ export const EditablesContext = createContext({ showEditingControls: true, theme
 
 export const EditablesProvider = ({ children, showEditingControls }) => {
   return (
-    <EditablesContext.Provider value={{ showEditingControls }}>
+    <EditablesContext.Provider value={{ showEditingControls, theme }}>
       {children}
     </EditablesContext.Provider>
   )
