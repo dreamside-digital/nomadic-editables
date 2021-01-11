@@ -1,39 +1,39 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Editable from "../common/Editable";
-import ImageUploadEditor from '../editingTools/ImageUploadEditor'
+import Editable from "common/Editable";
+import ImageUploadEditor from 'editingTools/ImageUploadEditor'
+import { makeStylesWithTheme } from 'common/EditablesContext'
 
-const defaultStyles = {
-  imageContainer: {
-    width: '100%',
-  },
+const useStyles = makeStylesWithTheme(theme => ({
   image: {
     height: 'auto',
     width: '100%'
   }
-}
+}))
 
-
-const EditableImageUpload = (props) => {
-  const handleSave = content => {
-    props.onSave(content)
-  }
-
-  const { classes, styles, content, showCaption } = props;
+const EditableImageUpload = ({
+  content,
+  onSave,
+  uploadImage,
+  maxSize,
+  imageProps={},
+  captionProps={},
+  ...rest
+}) => {
+  const classes = useStyles()
   const { imageSrc, caption, title } = content;
 
   return (
     <Editable
       Editor={ImageUploadEditor}
-      handleSave={handleSave}
+      handleSave={onSave}
+      uploadImage={uploadImage}
       content={{ imageSrc: imageSrc, caption: caption, title: title }}
-      { ...props }
+      { ...rest }
     >
-      <div className={classes} style={{...defaultStyles.imageContainer, ...styles.container}}>
-        <img src={imageSrc} alt={title} style={{...defaultStyles.image, ...styles.image}} />
-        { showCaption && <small>{caption}</small> }
-      </div>
+      <img src={imageSrc} alt={title} className={classes.image} {...imageProps} />
+      { caption && <small {...captionProps}>{caption}</small> }
     </Editable>
   );
 };

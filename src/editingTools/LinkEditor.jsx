@@ -1,26 +1,19 @@
 import React from 'react'
 import PropTypes from "prop-types";
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
+import { makeStylesWithTheme } from 'common/EditablesContext'
+import BasicInput from 'common/BasicInput'
 
-const styles = {
-  label: {
-    color: 'inherit',
+const useStyles = makeStylesWithTheme(theme => ({
+  wrapper: {
+    padding: '0.4rem'
   },
-  textField: {
-    width: "100%",
-    fontSize: "inherit",
-    fontFamily: "inherit",
-    fontWeight: "inherit",
-    color: "rgba(0,0,0,0.8)",
-    backgroundColor: "#fff",
-  },
-  input: {
-    borderRadius: '0'
+  formField: {
+    marginBottom: '0.4rem'
   }
-}
+}))
 
-const LinkEditor = ({ content, onContentChange, classes, EditorProps, editAnchorText }) => {
+const LinkEditor = ({ content, onContentChange, EditorProps, editAnchorText }) => {
+  const classes = useStyles()
 
   const handleChange = id => event => {
     event.preventDefault()
@@ -34,40 +27,28 @@ const LinkEditor = ({ content, onContentChange, classes, EditorProps, editAnchor
   const { anchor, link } = content;
 
   return (
-    <Grid container spacing={1} className={classes} style={styles.container}>
+    <div className={classes.wrapper}>
+
     {
       editAnchorText &&
-      <Grid item xs={12} md={6}>
-        <TextField
-          id="link-text"
+      <div className={classes.formField}>
+        <BasicInput
+          name="link-text"
           label="Link text"
           value={ anchor }
           onChange={handleChange('anchor')}
-          autoFocus={true}
-          variant="outlined"
-          size="small"
-          margin="dense"
-          InputProps={{ style: styles.input }}
-          style={styles.textField}
-          { ...EditorProps.anchor }
         />
-      </Grid>
+      </div>
     }
-      <Grid item xs={12} md={editAnchorText ? 6 : 12}>
-        <TextField
-          id="link-url"
+      <div className={classes.formField}>
+        <BasicInput
+          name="link-url"
           label="Link URL"
-          variant="outlined"
           value={ link }
           onChange={handleChange('link')}
-          size="small"
-          margin="dense"
-          InputProps={{ style: styles.input }}
-          style={styles.textField}
-          { ...EditorProps.link }
         />
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   )
 };
 

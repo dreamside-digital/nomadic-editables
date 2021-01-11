@@ -1,54 +1,41 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
-import { createUseStyles } from 'react-jss'
-import { useEditables } from './EditablesContext'
-import { ReactComponent as AddIcon } from '../assets/add.svg'
-import { ReactComponent as EditIcon } from '../assets/edit.svg'
-import { ReactComponent as CancelIcon } from '../assets/cancel.svg'
-import { ReactComponent as SaveIcon } from '../assets/done.svg'
-import { ReactComponent as DeleteIcon } from '../assets/delete.svg'
+import { useEditables, makeStylesWithTheme } from 'common/EditablesContext'
+import { ReactComponent as AddIcon } from 'assets/add.svg'
+import { ReactComponent as EditIcon } from 'assets/edit.svg'
+import { ReactComponent as CancelIcon } from 'assets/cancel.svg'
+import { ReactComponent as SaveIcon } from 'assets/done.svg'
+import { ReactComponent as DeleteIcon } from 'assets/delete.svg'
+import IconButton from './IconButton'
 
-const useStyles = createUseStyles({
+const useStyles = makeStylesWithTheme(theme => ({
   wrapper: props => ({
-    ...props.theme.editContainer,
-  }),
-  button: props => ({
-    ...props.theme.button,
-    fontFamily: props.theme.fontFamily,
+    ...theme.editContainer,
+    borderStyle: props.isEditing ? 'solid' : 'dashed'
   }),
   icon: props => ({
-    ...props.theme.icon,
+    ...theme.icon,
   }),
   actions: props => ({
-    ...props.theme.actions
+    ...theme.actions
   })
-})
-
-const Button = ({ onClick, label, children }) => {
-  const { theme } = useEditables()
-  const classes = useStyles({ theme })
-  return (
-    <button className={classes.button} onClick={onClick} aria-label={label} title={label} key={label}>
-      { children }
-    </button>
-  )
-}
+}))
 
 const ToggleEditingButton = ({ toggleEditing, isEditing }) => {
   const label = isEditing ? 'Cancel' : 'Edit'
   return (
-    <Button onClick={toggleEditing} label={label}>
+    <IconButton onClick={toggleEditing} label={label}>
       { isEditing ? <CancelIcon /> : <EditIcon /> }
-    </Button>
+    </IconButton>
   )
 }
 
 const SaveButton = ({onSave}) => (
-  <Button onClick={onSave} label="Save">
+  <IconButton onClick={onSave} label="Save">
     <SaveIcon />
-  </Button>
+  </IconButton>
 )
-const DeleteButton = ({onDelete}) => <Button onClick={onDelete} label="Delete"><DeleteIcon /></Button>
+const DeleteButton = ({onDelete}) => <IconButton onClick={onDelete} label="Delete"><DeleteIcon /></IconButton>
 
 const Editable = ({ children, content, Editor, EditorProps, onSave, onDelete, ...rest }) => {
   const [isEditing, setEditing] = useState(false)
@@ -64,8 +51,8 @@ const Editable = ({ children, content, Editor, EditorProps, onSave, onDelete, ..
 
   const renderEditingButtons = () => {
     let editingButtons = [
-      <SaveButton onSave={onSave} />,
-      <DeleteButton onDelete={onDelete} />
+      <SaveButton onSave={onSave} key={'save'}/>,
+      <DeleteButton onDelete={onDelete} key={'delete'} />
     ]
 
     if (isEditing) {

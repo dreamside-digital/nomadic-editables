@@ -1,24 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { theme } from "../common/EditablesContext";
+import BasicTextarea from 'common/BasicTextarea'
 
-const styles = {
-  header: {
-    display: "flex"
-  },
-  input: {
-    width: "100%",
-    fontSize: "inherit",
-    fontFamily: "inherit",
-    fontWeight: "inherit",
-    color: "rgba(0,0,0,0.8)",
-    backgroundColor: "#fff",
-    border: `1px solid ${theme.lightColor}`,
-    display: "flex",
-  }
-};
-
-const TextAreaEditor = ({ content, onContentChange, classes, EditorProps, placeholder }) => {
+const TextAreaEditor = ({ content, onContentChange, placeholder, ...rest }) => {
 
   const handleChange = event => {
     event.preventDefault()
@@ -32,16 +16,13 @@ const TextAreaEditor = ({ content, onContentChange, classes, EditorProps, placeh
   const text = Boolean(content) ? content.text : '';
 
   return (
-    <textarea
-      multiline="true"
+    <BasicTextarea
       wrap="on"
       rows="4"
-      style={styles.input}
       value={text}
       onChange={handleChange}
-      className={classes}
-      autoFocus={true}
-      {...EditorProps}
+      autofocus={true}
+      {...rest}
     />
   );
 }

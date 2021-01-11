@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
+import Button from 'common/Button'
 import { theme } from "../common/EditablesContext";
 
 
@@ -110,35 +109,33 @@ class FileUploadEditor extends React.Component {
     const { filetype, filename, filepath } = content;
 
     return (
-        <Grid container spacing={1} style={styles.container}>
-          <Grid item xs={12}>
-            <div style={styles.inner}>
-              <label style={this.state.preview ? {...styles.button, background: '#fff' } : styles.button} >
-                {this.state.preview ? 'Change file' : 'Select file'}
-                <input
-                  type="file"
-                  hidden={true}
-                  style={styles.hidden}
-                  accept={mimetypes}
-                  onChange={this.handleFileChange}
-                  { ...EditorProps }
-                />
-              </label>
-              {
-                this.state.fileError &&
-                <div>{`Your file is too big. Please select a file less than ${parseInt(this.props.maxSize) / (1024*1024)}MB.`}</div>
-              }
-              {this.state.loading && (
-                <div className="loader-container">
-                  <div className="loader">loading...</div>
-                </div>
-              )}
-              {this.state.preview && (
-                <div style={styles.preview}>{filename}</div>
-              )}
-            </div>
-          </Grid>
-        </Grid>
+        <div style={styles.container}>
+          <div style={styles.inner}>
+            <label style={this.state.preview ? {...styles.button, background: '#fff' } : styles.button} >
+              {this.state.preview ? 'Change file' : 'Select file'}
+              <input
+                type="file"
+                hidden={true}
+                style={styles.hidden}
+                accept={mimetypes}
+                onChange={this.handleFileChange}
+                { ...EditorProps }
+              />
+            </label>
+            {
+              this.state.fileError &&
+              <div>{`Your file is too big. Please select a file less than ${parseInt(this.props.maxSize) / (1024*1024)}MB.`}</div>
+            }
+            {this.state.loading && (
+              <div className="loader-container">
+                <div className="loader">loading...</div>
+              </div>
+            )}
+            {this.state.preview && (
+              <div style={styles.preview}>{filename}</div>
+            )}
+          </div>
+        </div>
     );
   }
 }

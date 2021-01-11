@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from 'prop-types'
-import Button from "@material-ui/core/Button"
-import IconButton from '@material-ui/core/IconButton';
-import AddIcon from "@material-ui/icons/Add";
-import { EditablesContext } from "../common/EditablesContext";
+import Button from "common/Button"
+import { ReactComponent as AddIcon } from 'assets/add.svg'
+import { EditablesContext } from "common/EditablesContext";
 
 
 class EditableCollection extends React.Component {
@@ -71,9 +70,9 @@ class EditableCollection extends React.Component {
           this.context.showEditingControls &&
           <div className="row mt-4">
             <div className="col-12">
-              <IconButton onClick={this.props.onAddItem || this.onAddItem}>
+              <Button onClick={this.props.onAddItem || this.onAddItem} label="Add item">
                 <AddIcon />
-              </IconButton>
+              </Button>
             </div>
           </div>
         }

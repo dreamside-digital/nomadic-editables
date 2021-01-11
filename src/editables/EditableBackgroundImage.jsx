@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Editable from "../common/Editable";
-import ImageUploadEditor from "../editingTools/ImageUploadEditor";
+import Editable from "common/Editable";
+import ImageUploadEditor from "editingTools/ImageUploadEditor";
 
 
 const EditableBackgroundImage = ({ content, onSave, children, styles, classes, ...rest }) => {

@@ -7,6 +7,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import url from '@rollup/plugin-url'
 import svgr from '@svgr/rollup'
 import { terser } from 'rollup-plugin-terser'
+import includePaths from 'rollup-plugin-includepaths';
 
 import pkg from './package.json'
 
@@ -25,6 +26,10 @@ export default {
     },
   ],
   plugins: [
+    includePaths({
+      paths: ["./src"],
+      extensions: ['.js', '.json', '.html', '.jsx']
+    }),
     postcss({
       plugins: [],
       minimize: true,

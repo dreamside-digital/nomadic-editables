@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import BasicInput from 'common/BasicInput'
 
 const styles = {
   header: {
@@ -30,12 +31,9 @@ const PlainTextEditor = ({ content, onContentChange, classes, EditorProps, place
   const text = Boolean(content) ? content.text : '';
 
   return (
-    <input
-      type="text"
-      style={styles.input}
+    <BasicInput
       value={text}
       onChange={handleChange}
-      className={classes}
       placeholder={placeholder}
       autoFocus={true}
       {...EditorProps}
