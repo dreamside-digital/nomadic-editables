@@ -13,7 +13,7 @@ const useStyles = makeStylesWithTheme(theme => ({
   }
 }))
 
-const RichTextEditor = ({ content, onContentChange, ...rest }) {
+const RichTextEditor = ({ content, onContentChange, placeholder, ...rest }) => {
   const [editorValue, setEditorValue] = useState(null)
   const { text='' } = content
   const classes = useStyles()
@@ -30,40 +30,32 @@ const RichTextEditor = ({ content, onContentChange, ...rest }) {
     onContentChange({ ...content, text })
   }
 
-  render() {
-    const { editorValue } = this.state;
-
-    if (editorValue) {
-      return (
-        <div className={classes.input}>
-          <TextEditor
-            placeholder={placeholder}
-            value={editorValue}
-            onChange={onChange}
-          />
-        </div>
-      )
-    }
-
-    return (<div />)
+  if (editorValue) {
+    return (
+      <div className={classes.input}>
+        <TextEditor
+          value={editorValue}
+          onChange={onChange}
+          placeholder={placeholder}
+          {...rest}
+        />
+      </div>
+    )
   }
+
+  return (<div />)
 };
 
 RichTextEditor.propTypes = {
   content: PropTypes.object.isRequired,
   onContentChange: PropTypes.func.isRequired,
-  EditorProps: PropTypes.object,
-  classes: PropTypes.string,
   placeholder: PropTypes.string
 }
 
 RichTextEditor.defaultProps = {
   content: { text: "" },
   onContentChange: updated => console.log('Implement a function to save content changes.', updated),
-  EditorProps: {},
-  classes: "",
   placeholder: ""
 }
-
 
 export default RichTextEditor;
