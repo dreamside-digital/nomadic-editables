@@ -9,16 +9,20 @@ const useStyles = makeStylesWithTheme(theme => ({
   image: {
     height: 'auto',
     width: '100%'
+  },
+  caption: {
+    fontStyle: 'italic',
+    color: theme.colors.darkgrey
   }
 }))
 
 const EditableImageUpload = ({
   content,
   onSave,
-  uploadImage,
+  uploadFile,
   maxSize,
-  imageProps={},
-  captionProps={},
+  imageProps,
+  captionProps,
   ...rest
 }) => {
   const classes = useStyles()
@@ -27,13 +31,16 @@ const EditableImageUpload = ({
   return (
     <Editable
       Editor={ImageUploadEditor}
-      handleSave={onSave}
-      uploadImage={uploadImage}
+      onSave={onSave}
+      uploadFile={uploadFile}
       content={{ imageSrc: imageSrc, caption: caption, title: title }}
+      mimetypes={'image/*'}
       { ...rest }
     >
+      <figure>
       <img src={imageSrc} alt={title} className={classes.image} {...imageProps} />
-      { caption && <small {...captionProps}>{caption}</small> }
+      { caption && <figcaption className={classes.caption} {...captionProps}>{caption}</figcaption> }
+      </figure>
     </Editable>
   );
 };
@@ -41,22 +48,19 @@ const EditableImageUpload = ({
 EditableImageUpload.propTypes = {
   content: PropTypes.shape({ imageSrc: PropTypes.string, caption: PropTypes.string, title: PropTypes.string }).isRequired,
   onSave: PropTypes.func.isRequired,
-  uploadImage: PropTypes.func.isRequired,
+  uploadFile: PropTypes.func.isRequired,
   onDelete: PropTypes.func,
-  showCaption: PropTypes.bool,
   maxSize: PropTypes.number,
-  styles: PropTypes.shape({ container: PropTypes.object, image: PropTypes.object }),
-  classes: PropTypes.string,
-  EditorProps: PropTypes.shape({ image: PropTypes.object, caption: PropTypes.object, title: PropTypes.object }),
+  imageProps: PropTypes.object,
+  captionProps: PropTypes.object,
 }
 
 EditableImageUpload.defaultProps = {
   content: { imageSrc: "https://www.nomadiclabs.ca/img/logo-03.png", caption: "", title: "" },
   onSave: content => console.log('Implement a function to save changes!', content),
-  showCaption: false,
   maxSize: 1024 * 1024 * 2, // 2MB
-  styles: { container: {}, image: {} },
-  EditorProps: { image: {}, caption: {}, title: {} },
+  imageProps: {},
+  captionProps: {}
 }
 
 export default EditableImageUpload;

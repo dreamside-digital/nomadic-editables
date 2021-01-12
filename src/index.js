@@ -18,7 +18,7 @@ import EditableImageUpload from "./editables/EditableImageUpload";
 // import EditableEmbeddedIframe from "./editables/EditableEmbeddedIframe";
 // import EditableLightboxImageUpload from "./editables/EditableLightboxImageUpload";
 
-import FileUploadEditor from "./editingTools/FileUploadEditor";
+// import FileUploadEditor from "./editingTools/FileUploadEditor";
 import ImageUploadEditor from "./editingTools/ImageUploadEditor";
 import LinkEditor from "./editingTools/LinkEditor";
 import NumberEditor from "editingTools/NumberEditor";

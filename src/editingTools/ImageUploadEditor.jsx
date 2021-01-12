@@ -16,10 +16,10 @@ const useStyles = makeStylesWithTheme(theme => ({
   }
 }))
 
-const ImageUploadEditor = ({ content, onContentChange, maxSize, uploadImage }) => {
+const FileUploadEditor = ({ content, onContentChange, maxSize, uploadFile, mimetypes }) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
-  const [preview, setPreview] = useState(content.imageSrc)
+  const [preview, setPreview] = useState(content.filepath)
   const classes = useStyles()
 
   const handleCaptionChange = event => {
@@ -40,60 +40,31 @@ const ImageUploadEditor = ({ content, onContentChange, maxSize, uploadImage }) =
     })
   }
 
-  const handleImageChange = async event => {
-    setLoading(true)
-    setError(null)
-    setPreview(null)
-
-    if (!event.target.files) {
-      setLoading(false)
-      setError(null)
-      setPreview(null)
-    }
-
-    const image = event.target.files[0];
-
-    if (!image) {
-      return setLoading(false)
-    }
-
-    if (image.size > maxSize) {
-      setLoading(false)
-      return setError(`Your file is too large. Please select a file less than ${parseInt(maxSize) / (1024*1024)}MB.`)
-    }
-
-    try {
-      const imageUrl = await uploadImage(image)
-      onContentChange({
-        ...content,
-        image: image,
-        imageSrc: imageUrl,
-      })
-      setLoading(false)
-      setPreview(imageUrl)
-    } catch (err) {
-      setError(err.message)
-      setLoading(false)
-    }
+  const handleImageChange = ({ filename, filepath }) => {
+    onContentChange({
+      ...content,
+      filepath,
+      filename
+    })
   }
 
-  const { imageSrc, title='', caption='' } = content;
+  const { filepath, filename, title='', caption='' } = content;
 
   return (
     <div className={classes.fileUploadForm}>
       <div className={classes.formField}>
         <BasicFileInput
           label="Select image"
-          filetypes="image/*"
+          mimetypes={mimetypes}
           onChange={handleImageChange}
           error={error}
           autoFocus={true}
-          name="image-upload"
+          name="file-upload"
         />
       </div>
       <div className={classes.formField}>
         <BasicInput
-          name="image-alt-text"
+          name="file-title"
           label="Description (alt text)"
           value={title}
           onChange={handleTitleChange}
@@ -102,7 +73,7 @@ const ImageUploadEditor = ({ content, onContentChange, maxSize, uploadImage }) =
       </div>
       <div className={classes.formField}>
         <BasicInput
-          name="image-caption"
+          name="file-caption"
           label="Caption"
           value={caption}
           onChange={handleCaptionChange}
@@ -113,20 +84,20 @@ const ImageUploadEditor = ({ content, onContentChange, maxSize, uploadImage }) =
   );
 }
 
-ImageUploadEditor.propTypes = {
+FileUploadEditor.propTypes = {
   content: PropTypes.shape({ imageSrc: PropTypes.string, caption: PropTypes.string, title: PropTypes.string }).isRequired,
   classes: PropTypes.string,
   EditorProps: PropTypes.shape({ image: PropTypes.object, caption: PropTypes.object, title: PropTypes.object }),
-  uploadImage: PropTypes.func,
+  uploadFile: PropTypes.func,
   onContentChange: PropTypes.func.isRequired
 }
 
-ImageUploadEditor.defaultProps = {
+FileUploadEditor.defaultProps = {
   content: { imageSrc: DEFAULT_BACKGROUND_IMAGE, caption: "", title: "" },
   EditorProps: { image: {}, caption: {}, title: {} },
-  uploadImage: image => console.log('Implement a Promise to save file and return URL.', image),
+  uploadFile: image => console.log('Implement a Promise to save file and return URL.', image),
   onContentChange: url => console.log('Implement a function to save content changes.', url),
 }
 
 
-export default ImageUploadEditor;
+export default FileUploadEditor;

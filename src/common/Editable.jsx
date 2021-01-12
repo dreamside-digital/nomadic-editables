@@ -49,17 +49,14 @@ const Editable = ({ children, content, Editor, EditorProps, onSave, onDelete, ..
     setEditingContent(updatedContent)
   }
 
-  const renderEditingButtons = () => {
-    let editingButtons = [
-      <SaveButton onSave={onSave} key={'save'}/>,
-      <DeleteButton onDelete={onDelete} key={'delete'} />
-    ]
+  const handleSave = () => {
+    onSave(editingContent)
+    setEditing(false)
+  }
 
-    if (isEditing) {
-      return editingButtons
-    }
-
-    return null
+  const handleDelete = () => {
+    onDelete()
+    setEditing(false)
   }
 
   if (showEditingControls) {
@@ -67,7 +64,8 @@ const Editable = ({ children, content, Editor, EditorProps, onSave, onDelete, ..
       <div className={classes.wrapper}>
         <div className={classes.actions}>
           <ToggleEditingButton toggleEditing={toggleEditing} isEditing={isEditing} />
-          { renderEditingButtons() }
+          { isEditing && <SaveButton onSave={handleSave} /> }
+          { isEditing && <DeleteButton onDelete={handleDelete} /> }
         </div>
         { isEditing ? (
           <Editor

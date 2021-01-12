@@ -3,19 +3,21 @@ import { createUseStyles } from 'react-jss'
 
 export const theme = {
   colors: {
-    primary: "#FF6C45", // orange
+    primary: "#F18664", // orange
     secondary: '#008080', // dark green
     light: "#EEEEEE", // light grey
     white: "#FDFDFD",
     dark: '#38302E',
     grey: '#ADADAD',
+    darkgrey: '#525252',
+    error: '#83280C'
   },
   spacing: multiplier => (`${2**multiplier}px`),
   fontFamily: "Inconsolata, mono",
   fontSize: 14,
   editContainer: {
     backgroundColor: "rgba(255,255,255,0.3)",
-    border: "2px dashed #FF6C45",
+    border: "2px dashed #F18664",
     position: "relative",
     margin: '1px',
     marginBottom: '12px',
@@ -24,7 +26,7 @@ export const theme = {
   editContainerHighlight: {
     backgroundColor: "rgba(255,255,255,0.9)",
     zIndex: "2500",
-    outline: "1px solid #FF6C45",
+    outline: "1px solid #F18664",
   },
   actions: {
     position: "absolute",
@@ -33,7 +35,7 @@ export const theme = {
     display: "flex",
     alignItems: "center",
     zIndex: "99",
-    backgroundColor: "#FF6C45",
+    backgroundColor: "#F18664",
     borderRadius: "30px",
     padding: '2px',
     width: "fit-content",

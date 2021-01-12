@@ -1,55 +1,64 @@
-import React from "react";
+import React from 'react'
 import PropTypes from 'prop-types'
 
-import Editable from "../common/Editable";
-import FileUploadEditor from "../editingTools/FileUploadEditor";
+import Editable from "common/Editable";
+import FileUploadEditor from 'editingTools/FileUploadEditor'
+import { makeStylesWithTheme } from 'common/EditablesContext'
 
-const EditableFileUpload = props => {
-  const handleSave = content => {
-    props.onSave(content)
+const useStyles = makeStylesWithTheme(theme => ({
+  image: {
+    height: 'auto',
+    width: '100%'
+  },
+  caption: {
+    fontStyle: 'italic',
+    color: theme.colors.darkgrey
   }
+}))
 
-  const { classes, styles, content } = props;
-  const { filename, filepath, filetype } = content;
+const EditableFileUpload = ({
+  content,
+  onSave,
+  uploadFile,
+  maxSize,
+  imageProps,
+  linkText
+  ...rest
+}) => {
+  const classes = useStyles()
+  const { filename, filepath, filetype, title } = content;
 
   return (
     <Editable
       Editor={FileUploadEditor}
-      handleSave={handleSave}
-      content={{
-        filepath: filepath,
-        filename: filename,
-        filetype: filetype
-      }}
-      {...props}
+      onSave={onSave}
+      uploadImage={uploadFile}
+      content={content}
+      { ...rest }
     >
-      <div className={`action-link ${classes}`} style={styles}>
-        <a className={props.linkClasses} href={filepath} target="_blank" rel="noopener noreferrer">
-          { props.linkText  ? props.linkText : filename }
-        </a>
-      </div>
+      <a className={props.linkClasses} href={filepath} target="_blank" rel="noopener noreferrer">
+        { title || filename }
+      </a>
     </Editable>
   );
 };
 
-
 EditableFileUpload.propTypes = {
-  content: PropTypes.shape({ filepath: PropTypes.string.isRequired, filename: PropTypes.string, filetype: PropTypes.string }).isRequired,
+  content: PropTypes.shape({ imageSrc: PropTypes.string, caption: PropTypes.string, title: PropTypes.string }).isRequired,
   onSave: PropTypes.func.isRequired,
+  uploadImage: PropTypes.func.isRequired,
   onDelete: PropTypes.func,
   maxSize: PropTypes.number,
-  classes: PropTypes.string,
-  EditorProps: PropTypes.object,
-  mimetypes: PropTypes.string,
+  imageProps: PropTypes.object,
+  captionProps: PropTypes.object,
 }
 
 EditableFileUpload.defaultProps = {
-  content: { filepath: '#', filename: "Placeholder" },
+  content: { imageSrc: "https://www.nomadiclabs.ca/img/logo-03.png", caption: "", title: "" },
   onSave: content => console.log('Implement a function to save changes!', content),
   maxSize: 1024 * 1024 * 2, // 2MB
-  mimetypes: "application/pdf,application/msword,application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.openxmlformats-officedocument.presentationml.slideshow, .csv",
-  classes: "",
-  styles: {},
+  imageProps: {},
+  captionProps: {}
 }
 
 export default EditableFileUpload;
