@@ -1,13 +1,12 @@
 {
   "name": "nomadic-editables",
   "version": "1.0.0",
-  "description": "editable components",
+  "description": "Editable components for React",
   "author": "s-kennedy",
   "license": "MIT",
   "repository": "nomadic-labs/nomadic-editables",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
-  "source": "src/index.js",
   "engines": {
     "node": ">=10"
   },
@@ -71,7 +70,6 @@
     "dist"
   ],
   "dependencies": {
-    "formik": "^2.2.6",
     "react-jss": "^10.5.0",
     "react-rte": "^0.16.3"
   },
