@@ -10,7 +10,8 @@ export const theme = {
     dark: '#38302E',
     grey: '#ADADAD',
     darkgrey: '#525252',
-    error: '#83280C'
+    error: '#83280C',
+    inputBackground: 'rgba(255,255,255,0.8)',
   },
   spacing: multiplier => (`${2**multiplier}px`),
   fontFamily: "Inconsolata, mono",
@@ -43,9 +44,9 @@ export const theme = {
   },
   button: {
     margin: '1px',
-    border: "1px solid #000",
-    color: "black",
-    backgroundColor: "#fff",
+    border: "1px solid #38302E",
+    color: "#38302E",
+    backgroundColor: "#FDFDFD",
     padding: "0.15rem 0.5rem",
     borderRadius: '4px',
     cursor: "pointer",
@@ -56,7 +57,7 @@ export const theme = {
     fontSize: "inherit",
     fontWeight: "700",
     "&:hover": {
-      backgroundColor: "#eee"
+      backgroundColor: "#EEEEEE"
     }
   }
 };

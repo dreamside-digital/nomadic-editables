@@ -2,21 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import BasicInput from 'common/BasicInput'
 
-const styles = {
-  header: {
-    display: "flex"
-  },
-  input: {
-    width: "100%",
-    fontSize: "inherit",
-    fontFamily: "inherit",
-    fontWeight: "inherit",
-    color: "rgba(0,0,0,0.8)",
-    backgroundColor: "#fff",
-    border: `1px solid #cccccc`,
-  }
-};
-
 const PlainTextEditor = ({ content, onContentChange, classes, EditorProps, placeholder }) => {
 
   const handleChange = event => {

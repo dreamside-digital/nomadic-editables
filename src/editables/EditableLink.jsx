@@ -6,16 +6,12 @@ import LinkEditor from "../editingTools/LinkEditor";
 
 
 const EditableLink = ({ content, onSave, classes, ...props }) => {
-  const handleSave = newContent => {
-    onSave(newContent);
-  };
-
   const { link, anchor } = content;
 
   return (
     <Editable
       Editor={LinkEditor}
-      handleSave={handleSave}
+      onSave={onSave}
       content={{ link, anchor }}
       {...props}
     >

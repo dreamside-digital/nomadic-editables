@@ -21,7 +21,7 @@ const TextAreaEditor = ({ content, onContentChange, placeholder, ...rest }) => {
       rows="4"
       value={text}
       onChange={handleChange}
-      autofocus={true}
+      autoFocus={true}
       {...rest}
     />
   );
@@ -31,7 +31,6 @@ TextAreaEditor.propTypes = {
   content: PropTypes.shape({ text: PropTypes.string }).isRequired,
   onContentChange: PropTypes.func.isRequired,
   classes: PropTypes.string,
-  EditorProps: PropTypes.object,
   placeholder: PropTypes.string
 }
 
@@ -39,8 +38,7 @@ TextAreaEditor.defaultProps = {
   content: { text: "" },
   onContentChange: updated => console.log('Implement a function to save content changes.', updated),
   classes: "",
-  placeholder: "",
-  EditorProps: {},
+  placeholder: ""
 }
 
 export default TextAreaEditor;

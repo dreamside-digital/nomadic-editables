@@ -5,21 +5,17 @@ import Editable from "../common/Editable";
 import NumberEditor from "../editingTools/NumberEditor";
 
 
-const EditableNumber = ({ className, ...props }) => {
-  const handleSave = newContent => {
-    props.onSave(newContent);
-  };
-
-  const { number } = props.content;
+const EditableNumber = ({ content, onSave, ...props }) => {
+  const { number } = content;
 
   return (
     <Editable
       Editor={NumberEditor}
-      handleSave={handleSave}
+      onSave={onSave}
       content={{ number: number }}
       {...props}
     >
-      <span className={className}>{ number }</span>
+      { number }
     </Editable>
   );
 };

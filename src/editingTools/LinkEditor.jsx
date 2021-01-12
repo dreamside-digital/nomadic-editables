@@ -5,14 +5,14 @@ import BasicInput from 'common/BasicInput'
 
 const useStyles = makeStylesWithTheme(theme => ({
   wrapper: {
-    padding: '0.4rem'
+    padding: theme.spacing(3)
   },
   formField: {
-    marginBottom: '0.4rem'
+    marginBottom: theme.spacing(3)
   }
 }))
 
-const LinkEditor = ({ content, onContentChange, EditorProps, editAnchorText }) => {
+const LinkEditor = ({ content, onContentChange, editAnchorText }) => {
   const classes = useStyles()
 
   const handleChange = id => event => {
@@ -56,7 +56,6 @@ LinkEditor.propTypes = {
   content: PropTypes.shape({ anchor: PropTypes.string, link: PropTypes.string }).isRequired,
   onContentChange: PropTypes.func.isRequired,
   classes: PropTypes.string,
-  EditorProps: PropTypes.shape({ anchor: PropTypes.object, link: PropTypes.object }),
   editAnchorText: PropTypes.bool,
 }
 
@@ -65,7 +64,6 @@ LinkEditor.defaultProps = {
   onContentChange: updated => console.log('Implement a function to save content changes.', updated),
   editAnchorText: true,
   classes: "",
-  EditorProps: { anchor: {}, link: {}},
 }
 
 

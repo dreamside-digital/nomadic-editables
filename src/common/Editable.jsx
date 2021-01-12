@@ -37,7 +37,7 @@ const SaveButton = ({onSave}) => (
 )
 const DeleteButton = ({onDelete}) => <IconButton onClick={onDelete} label="Delete"><DeleteIcon /></IconButton>
 
-const Editable = ({ children, content, Editor, EditorProps, onSave, onDelete, ...rest }) => {
+const Editable = ({ children, content, Editor, onSave, onDelete, showChildren, ...rest }) => {
   const [isEditing, setEditing] = useState(false)
   const [editingContent, setEditingContent] = useState(content)
   const { showEditingControls, theme } = useEditables()
@@ -67,17 +67,15 @@ const Editable = ({ children, content, Editor, EditorProps, onSave, onDelete, ..
           { isEditing && <SaveButton onSave={handleSave} /> }
           { isEditing && <DeleteButton onDelete={handleDelete} /> }
         </div>
-        { isEditing ? (
+        { isEditing && (
           <Editor
             content={editingContent}
             onContentChange={onContentChange}
             classes={classes}
-            EditorProps={EditorProps}
             { ...rest }
           />
-        ) : (
-          children
         )}
+        { (!isEditing || showChildren) && children }
       </div>
     )
   }

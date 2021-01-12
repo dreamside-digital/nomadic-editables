@@ -1,25 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Editable from "../common/Editable";
-import RichTextEditor from '../editingTools/RichTextEditor'
+import Editable from "common/Editable";
+import RichTextEditor from 'editingTools/RichTextEditor'
 
-const EditableParagraph = props => {
-  const handleSave = newContent => {
-    props.onSave(newContent);
-  };
-
-  const { text } = props.content;
+const EditableParagraph = ({ content, onSave, ...rest}) => {
+  const { text } = content;
 
   return (
     <Editable
       Editor={RichTextEditor}
-      handleSave={handleSave}
+      onSave={onSave}
       content={{ text: text }}
-      { ...props }
+      { ...rest }
     >
-      <div className={props.classes} dangerouslySetInnerHTML={ {__html: text} }>
-      </div>
+      <div className={""} dangerouslySetInnerHTML={ {__html: text} } />
     </Editable>
   );
 };

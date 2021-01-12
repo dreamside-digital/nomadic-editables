@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import BasicInput from 'common/BasicInput'
 
-const NumberEditor = ({ content, onContentChange, classes, EditorProps, placeholder }) => {
+const NumberEditor = ({ content, onContentChange, classes, placeholder, ...rest }) => {
 
   const handleChange = event => {
     event.preventDefault()
@@ -21,7 +21,8 @@ const NumberEditor = ({ content, onContentChange, classes, EditorProps, placehol
       onChange={handleChange}
       placeholder={placeholder}
       autoFocus={true}
-      {...EditorProps}
+      type="number"
+      {...rest}
     />
   );
 }

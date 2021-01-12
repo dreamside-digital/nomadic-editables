@@ -110,7 +110,7 @@ const BasicFileInput = ({
           {label}
         </label>
         { loading && <span className={classes.info}>loading...</span> }
-        { filepath && <span className={classes.info}><a href={filepath}>{filename}</a></span> }
+        { filename && <span className={classes.info}><a href={filepath}>{filename}</a></span> }
       </div>
       { error && <p className={classes.errorMessage}>{error}</p> }
     </div>

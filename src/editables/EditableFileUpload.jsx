@@ -6,14 +6,7 @@ import FileUploadEditor from 'editingTools/FileUploadEditor'
 import { makeStylesWithTheme } from 'common/EditablesContext'
 
 const useStyles = makeStylesWithTheme(theme => ({
-  image: {
-    height: 'auto',
-    width: '100%'
-  },
-  caption: {
-    fontStyle: 'italic',
-    color: theme.colors.darkgrey
-  }
+  link: theme.link,
 }))
 
 const EditableFileUpload = ({
@@ -21,22 +14,22 @@ const EditableFileUpload = ({
   onSave,
   uploadFile,
   maxSize,
-  imageProps,
-  linkText
+  linkText,
+  linkProps,
   ...rest
 }) => {
   const classes = useStyles()
-  const { filename, filepath, filetype, title } = content;
+  const { filename, filepath, title } = content;
 
   return (
     <Editable
       Editor={FileUploadEditor}
       onSave={onSave}
-      uploadImage={uploadFile}
+      uploadFile={uploadFile}
       content={content}
       { ...rest }
     >
-      <a className={props.linkClasses} href={filepath} target="_blank" rel="noopener noreferrer">
+      <a href={filepath} target="_blank" rel="noopener noreferrer" {...linkProps}>
         { title || filename }
       </a>
     </Editable>
@@ -44,7 +37,12 @@ const EditableFileUpload = ({
 };
 
 EditableFileUpload.propTypes = {
-  content: PropTypes.shape({ imageSrc: PropTypes.string, caption: PropTypes.string, title: PropTypes.string }).isRequired,
+  content: PropTypes.shape({
+    filepath: PropTypes.string,
+    filename: PropTypes.string,
+    caption: PropTypes.string,
+    title: PropTypes.string
+  }).isRequired,
   onSave: PropTypes.func.isRequired,
   uploadImage: PropTypes.func.isRequired,
   onDelete: PropTypes.func,
@@ -54,7 +52,7 @@ EditableFileUpload.propTypes = {
 }
 
 EditableFileUpload.defaultProps = {
-  content: { imageSrc: "https://www.nomadiclabs.ca/img/logo-03.png", caption: "", title: "" },
+  content: { filepath: "https://www.nomadiclabs.ca/img/logo-03.png", filename: "logo-03.png", caption: "", title: "" },
   onSave: content => console.log('Implement a function to save changes!', content),
   maxSize: 1024 * 1024 * 2, // 2MB
   imageProps: {},

@@ -19,7 +19,7 @@ const useStyles = makeStylesWithTheme(theme => ({
     fontFamily: "inherit",
     fontWeight: "inherit",
     color: theme.colors.dark,
-    backgroundColor: 'rgba(255,255,255,0.8)',
+    backgroundColor: theme.colors.inputBackground,
     '&:focus': {
       border: `1px solid ${theme.colors.secondary}`,
     }
@@ -44,8 +44,8 @@ const BasicInput = ({
   onChange,
   label,
   name,
-  value,
   placeholder,
+  value='',
   type='text',
   labelProps={},
   inputProps={},
@@ -72,7 +72,6 @@ const BasicInput = ({
         onChange={onChange}
         value={value}
         placeholder={placeholder}
-        autoFocus={true}
         {...inputProps}
         {...rest}
       />

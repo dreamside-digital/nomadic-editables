@@ -1,30 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Input from '@material-ui/core/Input';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
+import React from "react"
+import PropTypes from "prop-types"
+import BasicInput from 'common/BasicInput'
+import { makeStylesWithTheme } from 'common/EditablesContext'
 
-const styles = {
-  header: {
-    display: "flex"
+const useStyles = makeStylesWithTheme(theme => ({
+  wrapper: {
+    padding: theme.spacing(3)
   },
-  container: {
-    padding: '0.5rem'
-  },
-  textField: {
-    width: "100%",
-    fontSize: "inherit",
-    fontFamily: "inherit",
-    fontWeight: "inherit",
-    color: "rgba(0,0,0,0.8)",
-    backgroundColor: "#fff",
-  },
-  input: {
-    borderRadius: '0'
-  },
-};
+  formField: {
+    marginBottom: theme.spacing(3)
+  }
+}))
 
 const EmbeddedIframeEditor = ({ content, onContentChange }) => {
+  const classes = useStyles()
+  const { src, title, height, width, embedCode } = content
 
   const handleChange = id => event => {
     event.preventDefault()
@@ -35,72 +25,82 @@ const EmbeddedIframeEditor = ({ content, onContentChange }) => {
     })
   }
 
-  const src = Boolean(content) ? content.src : '';
-  const title = Boolean(content) ? content.title : '';
-  const height = Boolean(content) ? content.height : '';
-  const width = Boolean(content) ? content.width : '';
+  const handleChangeEmbedCode = event => {
+    const value = event.currentTarget.value
+
+    const srcRegex = /(?<=src=["']).*?(?=["'])/
+    const src = srcRegex.exec(value) || ''
+
+    const titleRegex = /(?<=title=["']).*?(?=["'])/
+    const title = titleRegex.exec(value) || ''
+
+    const heightRegex = /(?<=height=["']).*?(?=["'])/
+    const height = heightRegex.exec(value) || ''
+
+    const widthRegex = /(?<=width=["']).*?(?=["'])/
+    const width = widthRegex.exec(value) || ''
+
+    onContentChange({
+      ...content,
+      embedCode: value,
+      src,
+      title,
+      height,
+      width
+    })
+  }
 
   return (
-    <Grid container spacing={1} style={styles.container}>
-      <Grid item xs={12}>
-        <TextField
-          id="iframe-src"
+    <div className={classes.wrapper}>
+      <div className={classes.formField}>
+        <BasicInput
+          name="iframe-embed-code"
+          label="Iframe embed code"
+          value={embedCode}
+          onChange={handleChangeEmbedCode}
+          autoFocus={true}
+          required
+        />
+      </div>
+
+      <div className={classes.formField}>
+        <BasicInput
+          name="iframe-src"
           label="Iframe source URL"
-          style={styles.textField}
           value={src}
           onChange={handleChange('src')}
-          helperText="In the embed code, look for the 'src' attribute and copy that URL."
           required
-          variant="outlined"
-          size="small"
-          margin="dense"
-          InputProps={{ style: styles.input }}
         />
-      </Grid>
+      </div>
 
-      <Grid item xs={12} sm={12} md={4}>
-        <TextField
-          id="iframe-title"
+      <div className={classes.formField}>
+        <BasicInput
+          name="iframe-title"
           label="Title"
-          style={styles.textField}
           value={title}
           onChange={handleChange('title')}
           required
-          variant="outlined"
-          size="small"
-          margin="dense"
-          InputProps={{ style: styles.input }}
         />
-      </Grid>
+      </div>
 
-      <Grid item xs={12} sm={6} md={4}>
-        <TextField
-          id="iframe-height"
+      <div className={classes.formField}>
+        <BasicInput
+          name="iframe-height"
           label="Height (optional)"
-          style={styles.textField}
           value={height}
           onChange={handleChange('height')}
-          variant="outlined"
-          size="small"
-          margin="dense"
-          InputProps={{ style: styles.input }}
         />
-      </Grid>
+      </div>
 
-      <Grid item xs={12} sm={6} md={4}>
-        <TextField
-          id="iframe-width"
+      <div className={classes.formField}>
+        <BasicInput
+          name="iframe-width"
           label="Width (optional)"
-          style={styles.textField}
           value={width}
           onChange={handleChange('width')}
-          variant="outlined"
-          size="small"
-          margin="dense"
-          InputProps={{ style: styles.input }}
         />
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 }
 
@@ -110,7 +110,7 @@ EmbeddedIframeEditor.propTypes = {
 }
 
 EmbeddedIframeEditor.defaultProps = {
-  content: { src: "", title: "", height: "300px", width: "560px" },
+  content: {},
   onContentChange: updated => console.log('Implement a function to save content changes.', updated)
 }
 

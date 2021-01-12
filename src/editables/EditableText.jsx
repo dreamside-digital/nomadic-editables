@@ -5,17 +5,13 @@ import Editable from "../common/Editable";
 import PlainTextEditor from "../editingTools/PlainTextEditor";
 
 
-const EditableText = ({ classes, content, ...props }) => {
-  const handleSave = newContent => {
-    props.onSave(newContent);
-  };
-
+const EditableText = ({ content, onSave, ...props }) => {
   const { text } = content;
 
   return (
     <Editable
       Editor={PlainTextEditor}
-      handleSave={handleSave}
+      onSave={onSave}
       content={content}
       {...props}
     >
@@ -28,8 +24,6 @@ EditableText.propTypes = {
   content: PropTypes.shape({ text: PropTypes.string }).isRequired,
   onSave: PropTypes.func.isRequired,
   onDelete: PropTypes.func,
-  classes: PropTypes.string,
-  EditorProps: PropTypes.object,
   placeholder: PropTypes.string,
 }
 

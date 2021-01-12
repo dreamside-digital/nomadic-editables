@@ -3,27 +3,26 @@ import PropTypes from "prop-types";
 
 import Editable from "../common/Editable";
 import TextAreaEditor from "../editingTools/TextAreaEditor";
+import { makeStylesWithTheme } from 'common/EditablesContext'
 
-const styles = {
-  whiteSpace: "pre-wrap",
-}
+const useStyles = makeStylesWithTheme(theme => ({
+  textarea: {
+    whiteSpace: "pre-wrap"
+  }
+}))
 
-const EditableTextArea = ({ classes, content, ...props }) => {
-  const handleSave = newContent => {
-    props.onSave(newContent);
-  };
-
+const EditableTextArea = ({ content, onSave, ...props }) => {
   const { text } = content;
+  const classes = useStyles()
 
   return (
     <Editable
       Editor={TextAreaEditor}
-      handleSave={handleSave}
+      onSave={onSave}
       content={content}
-      classes={classes}
       {...props}
     >
-      <span className={classes} style={styles}>{ text }</span>
+      <span className={classes.textarea}>{ text }</span>
     </Editable>
   );
 };
@@ -32,8 +31,7 @@ EditableTextArea.propTypes = {
   content: PropTypes.shape({ text: PropTypes.string }).isRequired,
   onSave: PropTypes.func.isRequired,
   onDelete: PropTypes.func,
-  classes: PropTypes.string,
-  EditorProps: PropTypes.object,
+  classes: PropTypes.string
 }
 
 EditableTextArea.defaultProps = {

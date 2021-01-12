@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Editable from "common/Editable";
-import FileUploadEditor from 'editingTools/FileUploadEditor'
+import ImageUploadEditor from 'editingTools/ImageUploadEditor'
 import { makeStylesWithTheme } from 'common/EditablesContext'
 
 const useStyles = makeStylesWithTheme(theme => ({
@@ -30,16 +30,16 @@ const EditableImageUpload = ({
 
   return (
     <Editable
-      Editor={FileUploadEditor}
+      Editor={ImageUploadEditor}
       onSave={onSave}
       uploadFile={uploadFile}
-      content={{ filepath: filepath, filename: filename, caption: caption, title: title }}
+      content={content}
       mimetypes={'image/*'}
       { ...rest }
     >
       <figure>
-      <img src={filepath} alt={title} className={classes.image} {...imageProps} />
-      { caption && <figcaption className={classes.caption} {...captionProps}>{caption}</figcaption> }
+        <img src={filepath} alt={title} className={classes.image} {...imageProps} />
+        { caption && <figcaption className={classes.caption} {...captionProps}>{caption}</figcaption> }
       </figure>
     </Editable>
   );

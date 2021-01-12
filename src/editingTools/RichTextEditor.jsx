@@ -1,56 +1,45 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from "prop-types";
 import TextEditor, { createValueFromString } from 'react-rte';
+import { makeStylesWithTheme } from 'common/EditablesContext'
 
-const styles = {
+const useStyles = makeStylesWithTheme(theme => ({
   input: {
     fontSize: "inherit",
     fontFamily: "inherit",
     fontWeight: "inherit",
-    color: "rgba(0,0,0,0.8)",
-    backgroundColor: "#fff",
+    color: theme.colors.dark,
+    backgroundColor: theme.colors.inputBackground,
   }
-};
+}))
 
-class RichTextEditor extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { editorValue: null }
-  }
+const RichTextEditor = ({ content, onContentChange, ...rest }) {
+  const [editorValue, setEditorValue] = useState(null)
+  const { text='' } = content
+  const classes = useStyles()
 
-  componentDidMount() {
-    this.initializeEditorState();
-  }
-
-  initializeEditorState = () => {
-    const text = Boolean(this.props.content) ? this.props.content.text : '';
+  useEffect(() => {
     const editorValue = createValueFromString(text, 'html');
-    this.setState({ editorValue });
-  }
+    setEditorValue(editorValue);
+  }, [text])
 
-  onChange = (editorValue) => {
+
+  const onChange = editorValue => {
+    setEditorValue(editorValue)
     const text = editorValue.toString('html')
-
-    this.setState({ editorValue })
-    this.props.onContentChange({
-      ...this.props.content,
-      text: text
-    })
+    onContentChange({ ...content, text })
   }
-
 
   render() {
     const { editorValue } = this.state;
-    const { classes, EditorProps, placeholder } = this.props;
 
     if (editorValue) {
       return (
-        <div style={styles.input} className={classes}>
+        <div className={classes.input}>
           <TextEditor
             placeholder={placeholder}
             value={editorValue}
-            onChange={this.onChange}
-            {...EditorProps}
+            onChange={onChange}
           />
         </div>
       )
