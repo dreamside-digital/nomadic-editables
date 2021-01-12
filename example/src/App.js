@@ -15,7 +15,7 @@ const defaultContent = {
   number: { number: 10 },
   textarea: { text: "hey sharon hey sharon hey sharon hey sharon" },
   link: { anchor: "i am a link", link: "/" },
-  image: { imageSrc: "https://www.nomadiclabs.ca/img/sharon.jpg", title: "sharon's head", caption: "hey there" },
+  image: { filepath: "https://www.nomadiclabs.ca/img/sharon.jpg", title: "sharon's head", caption: "hey there" },
 }
 
 const App = () => {

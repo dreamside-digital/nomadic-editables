@@ -32,8 +32,9 @@ const useStyles = makeStylesWithTheme(theme => ({
   }
 }))
 
+const defaultUploadFile =  file => console.log('Implement a Promise to save file and return URL.', file)
+
 const BasicFileInput = ({
-  uploadFile,
   onChange,
   label,
   name,
@@ -41,6 +42,8 @@ const BasicFileInput = ({
   mimetypes,
   labelProps={},
   inputProps={},
+  maxSize=(1024 * 1024 * 2), // 2MB
+  uploadFile=defaultUploadFile,
   ...rest
 }) => {
   const classes = useStyles()
@@ -81,7 +84,7 @@ const BasicFileInput = ({
       setFilename(filename)
       setFilepath(filepath)
       setLoading(false)
-      onContentChange({ filepath, filename })
+      onChange({ filepath, filename })
     } catch (err) {
       setLoading(false)
       setError(err.message)
@@ -97,7 +100,7 @@ const BasicFileInput = ({
           className={classes.hiddenInput}
           type="file"
           accept={mimetypes}
-          onChange={onChange}
+          onChange={handleChange}
           value={value}
           autoFocus={true}
           {...inputProps}

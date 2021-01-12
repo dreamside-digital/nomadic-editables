@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Editable from "common/Editable";
-import ImageUploadEditor from 'editingTools/ImageUploadEditor'
+import FileUploadEditor from 'editingTools/FileUploadEditor'
 import { makeStylesWithTheme } from 'common/EditablesContext'
 
 const useStyles = makeStylesWithTheme(theme => ({
@@ -26,19 +26,19 @@ const EditableImageUpload = ({
   ...rest
 }) => {
   const classes = useStyles()
-  const { imageSrc, caption, title } = content;
+  const { filepath, filename, caption, title } = content;
 
   return (
     <Editable
-      Editor={ImageUploadEditor}
+      Editor={FileUploadEditor}
       onSave={onSave}
       uploadFile={uploadFile}
-      content={{ imageSrc: imageSrc, caption: caption, title: title }}
+      content={{ filepath: filepath, filename: filename, caption: caption, title: title }}
       mimetypes={'image/*'}
       { ...rest }
     >
       <figure>
-      <img src={imageSrc} alt={title} className={classes.image} {...imageProps} />
+      <img src={filepath} alt={title} className={classes.image} {...imageProps} />
       { caption && <figcaption className={classes.caption} {...captionProps}>{caption}</figcaption> }
       </figure>
     </Editable>
@@ -46,7 +46,7 @@ const EditableImageUpload = ({
 };
 
 EditableImageUpload.propTypes = {
-  content: PropTypes.shape({ imageSrc: PropTypes.string, caption: PropTypes.string, title: PropTypes.string }).isRequired,
+  content: PropTypes.shape({ filepath: PropTypes.string, filename: PropTypes.string, caption: PropTypes.string, title: PropTypes.string }).isRequired,
   onSave: PropTypes.func.isRequired,
   uploadFile: PropTypes.func.isRequired,
   onDelete: PropTypes.func,
@@ -56,7 +56,7 @@ EditableImageUpload.propTypes = {
 }
 
 EditableImageUpload.defaultProps = {
-  content: { imageSrc: "https://www.nomadiclabs.ca/img/logo-03.png", caption: "", title: "" },
+  content: { filepath: "https://www.nomadiclabs.ca/img/logo-03.png", caption: "", title: "" },
   onSave: content => console.log('Implement a function to save changes!', content),
   maxSize: 1024 * 1024 * 2, // 2MB
   imageProps: {},

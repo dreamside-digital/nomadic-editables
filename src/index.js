@@ -18,8 +18,7 @@ import EditableImageUpload from "./editables/EditableImageUpload";
 // import EditableEmbeddedIframe from "./editables/EditableEmbeddedIframe";
 // import EditableLightboxImageUpload from "./editables/EditableLightboxImageUpload";
 
-// import FileUploadEditor from "./editingTools/FileUploadEditor";
-import ImageUploadEditor from "./editingTools/ImageUploadEditor";
+import FileUploadEditor from "./editingTools/FileUploadEditor";
 import LinkEditor from "./editingTools/LinkEditor";
 import NumberEditor from "editingTools/NumberEditor";
 import PlainTextEditor from "editingTools/PlainTextEditor";
@@ -40,5 +39,5 @@ export {
   PlainTextEditor,
   TextAreaEditor,
   LinkEditor,
-  ImageUploadEditor
+  FileUploadEditor
 }
