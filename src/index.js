@@ -23,7 +23,6 @@ import FileUploadEditor from "./editingTools/FileUploadEditor";
 import LinkEditor from "./editingTools/LinkEditor";
 import NumberEditor from "editingTools/NumberEditor";
 import PlainTextEditor from "editingTools/PlainTextEditor";
-import RichTextEditor from "editingTools/RichTextEditor";
 import TextAreaEditor from "editingTools/TextAreaEditor";
 import EmbeddedIframeEditor from "./editingTools/EmbeddedIframeEditor";
 
@@ -43,7 +42,6 @@ export {
   EditableBackgroundImage,
   NumberEditor,
   PlainTextEditor,
-  RichTextEditor,
   TextAreaEditor,
   LinkEditor,
   FileUploadEditor,

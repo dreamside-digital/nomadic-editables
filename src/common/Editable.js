@@ -64,7 +64,7 @@ const Editable = ({ children, content, Editor, onSave, onDelete, showChildren, i
   const [isEditing, setEditing] = useState(false)
   const [editingContent, setEditingContent] = useState(content)
   const { showEditingControls, theme } = useEditables()
-  const classes = useStyles({ isEditing, theme, isSaving })
+  const classes = useStyles({ isEditing, isSaving })
 
   useEffect(() => {
     setEditingContent(content)

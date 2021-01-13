@@ -18,17 +18,19 @@ export default {
       file: pkg.module,
       format: 'es',
       sourcemap: true,
+      inlineDynamicImports: true,
     },
     {
       file: pkg.main,
       format: 'cjs',
       sourcemap: true,
+      inlineDynamicImports: true,
     },
   ],
   plugins: [
     includePaths({
       paths: ["./src"],
-      extensions: ['.js', '.json', '.html', '.jsx']
+      extensions: ['.js', '.json', '.html', '.jsx', '.css']
     }),
     postcss({
       plugins: [],
@@ -46,6 +48,7 @@ export default {
         ...DEFAULT_EXTENSIONS,
         '.js',
         '.jsx',
+        '.css',
       ],
       plugins: [
         '@babel/plugin-proposal-object-rest-spread',
@@ -60,9 +63,10 @@ export default {
     url(),
     svgr(),
     resolve({
-      extensions: [".js", ".jsx"]
+      extensions: [".js", ".jsx", ".css"]
     }),
     commonjs(),
     terser(),
   ],
 }
+

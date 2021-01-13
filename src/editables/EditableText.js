@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import Editable from "../common/Editable";
 import PlainTextEditor from "../editingTools/PlainTextEditor";
 
-
 const EditableText = ({ content, onSave, ...props }) => {
   const { text } = content;
 
