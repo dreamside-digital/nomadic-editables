@@ -20,7 +20,6 @@ const RichTextEditor = ({ content, onContentChange, placeholder, ...rest }) => {
 
   useEffect(() => {
     if (!editorValue) {
-      console.log("initializing editor")
       const editorValue = createValueFromString(text, 'html');
       setEditorValue(editorValue);
     }

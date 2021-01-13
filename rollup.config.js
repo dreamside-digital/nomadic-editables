@@ -7,7 +7,8 @@ import resolve from '@rollup/plugin-node-resolve'
 import url from '@rollup/plugin-url'
 import svgr from '@svgr/rollup'
 import { terser } from 'rollup-plugin-terser'
-import includePaths from 'rollup-plugin-includepaths';
+import includePaths from 'rollup-plugin-includepaths'
+import inject from 'rollup-plugin-inject'
 
 import pkg from './package.json'
 
@@ -31,6 +32,10 @@ export default {
     includePaths({
       paths: ["./src"],
       extensions: ['.js', '.json', '.html', '.jsx', '.css']
+    }),
+    inject({
+      include: 'node_modules/react-rte/**',
+      window: 'global/window'
     }),
     postcss({
       plugins: [],
