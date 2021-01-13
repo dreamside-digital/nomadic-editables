@@ -31,6 +31,10 @@ const useStyles = makeStylesWithTheme(theme => ({
     backgroundPosition: 'left top, right bottom, left bottom, right top',
     animation: props.isSaving ? '$borderDance 1s infinite linear' : 'none',
   }),
+  editor: props => ({
+    transition: 'all 0.15s ease',
+    filter: props.isSaving ? 'blur(3px)' : 'none',
+  }),
   editing: {
     background: 'none !important',
     padding: '0 !important',
@@ -94,15 +98,17 @@ const Editable = ({ children, content, Editor, onSave, onDelete, showChildren, i
           { isEditing && <SaveButton onSave={handleSave} /> }
           { isEditing && <DeleteButton onDelete={handleDelete} /> }
         </div>
-        { isEditing && (
-          <Editor
-            content={editingContent}
-            onContentChange={onContentChange}
-            classes={classes}
-            { ...rest }
-          />
-        )}
-        { (!isEditing || showChildren) && children }
+        <div className={classes.editor}>
+          { (isEditing || isSaving) && (
+            <Editor
+              content={editingContent}
+              onContentChange={onContentChange}
+              classes={classes}
+              { ...rest }
+            />
+          )}
+        </div>
+        { (!isEditing && !isSaving || showChildren) && children }
       </div>
     )
   }
