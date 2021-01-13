@@ -17,12 +17,7 @@ export const theme = {
   fontFamily: "Inconsolata, mono",
   fontSize: 14,
   editContainer: {
-    backgroundColor: "rgba(255,255,255,0.3)",
-    border: "2px dashed #F18664",
-    position: "relative",
-    margin: '1px',
-    marginBottom: '12px',
-    borderRadius: '4px',
+
   },
   editContainerHighlight: {
     backgroundColor: "rgba(255,255,255,0.9)",

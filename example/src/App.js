@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import {
-  Editable,
   EditablesProvider,
   EditableText,
   EditableNumber,
@@ -12,7 +11,6 @@ import {
   EditableEmbeddedIframe,
   EditableBackgroundImage,
 } from 'nomadic-editables'
-// import 'nomadic-editables/dist/index.css'
 
 const defaultContent = {
   title: { text: "hey sharon" },
