@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import Editable from "common/Editable";
-import ImageUploadEditor from "editingTools/ImageUploadEditor";
 import { makeStylesWithTheme } from 'common/EditablesContext'
 
 const useStyles = makeStylesWithTheme(theme => ({
@@ -21,7 +19,7 @@ const EditableBackgroundImage = ({ content, onSave, children, ...rest }) => {
 
   return (
     <Editable
-      Editor={ImageUploadEditor}
+      loader={() => import("editingTools/ImageUploadEditor")}
       onSave={onSave}
       content={content}
       showChildren

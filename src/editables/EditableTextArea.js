@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-import Editable from "../common/Editable";
-import TextAreaEditor from "../editingTools/TextAreaEditor";
+import Editable from "common/Editable";
 import { makeStylesWithTheme } from 'common/EditablesContext'
 
 const useStyles = makeStylesWithTheme(theme => ({
@@ -17,7 +15,7 @@ const EditableTextArea = ({ content, onSave, ...props }) => {
 
   return (
     <Editable
-      Editor={TextAreaEditor}
+      loader={() => import("editingTools/TextAreaEditor")}
       onSave={onSave}
       content={content}
       {...props}

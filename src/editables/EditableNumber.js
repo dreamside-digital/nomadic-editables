@@ -2,15 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Editable from "../common/Editable";
-import NumberEditor from "../editingTools/NumberEditor";
-
 
 const EditableNumber = ({ content, onSave, ...props }) => {
   const { number } = content;
 
   return (
     <Editable
-      Editor={NumberEditor}
+      loader={() => import("editingTools/NumberEditor")}
       onSave={onSave}
       content={{ number: number }}
       {...props}

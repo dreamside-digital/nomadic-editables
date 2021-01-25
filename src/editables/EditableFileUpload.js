@@ -23,7 +23,7 @@ const EditableFileUpload = ({
 
   return (
     <Editable
-      Editor={FileUploadEditor}
+      loader={() => import('editingTools/FileUploadEditor')}
       onSave={onSave}
       uploadFile={uploadFile}
       content={content}

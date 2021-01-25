@@ -62,17 +62,31 @@ const SaveButton = ({onSave}) => (
     <SaveIcon />
   </IconButton>
 )
+
 const DeleteButton = ({onDelete}) => <IconButton onClick={onDelete} label="Delete"><DeleteIcon /></IconButton>
 
-const Editable = ({ children, content, Editor, onSave, onDelete, showChildren, isSaving, ...rest }) => {
+const Editable = ({ children, content, loader, Editor, onSave, onDelete, showChildren, isSaving, ...rest }) => {
   const [isEditing, setEditing] = useState(false)
   const [editingContent, setEditingContent] = useState(content)
+  const [loadedEditor, setEditor] = useState()
   const { showEditingControls, theme } = useEditables()
   const classes = useStyles({ isEditing, isSaving })
 
   useEffect(() => {
     setEditingContent(content)
   }, [content])
+
+  useEffect(() => {
+    const loadEditor = async () => {
+      const { default: Component } = await loader()
+      setEditor({ component: Component })
+    }
+
+    if (isEditing && loader && !loadedEditor) {
+      loadEditor()
+    }
+
+  }, [isEditing, loadedEditor, loader])
 
   const toggleEditing = () => setEditing(!isEditing)
 
@@ -91,6 +105,9 @@ const Editable = ({ children, content, Editor, onSave, onDelete, showChildren, i
   }
 
   if (showEditingControls) {
+    const EditorComponent = Editor || loadedEditor?.component
+    const showEditor = (isEditing || isSaving) && EditorComponent
+
     return (
       <div className={`${classes.wrapper} ${isEditing ? classes.editing : ''}`}>
         <div className={classes.actions}>
@@ -98,17 +115,18 @@ const Editable = ({ children, content, Editor, onSave, onDelete, showChildren, i
           { isEditing && <SaveButton onSave={handleSave} /> }
           { isEditing && <DeleteButton onDelete={handleDelete} /> }
         </div>
-        <div className={classes.editor}>
-          { (isEditing || isSaving) && (
-            <Editor
+        {
+          showEditor &&
+          <div className={classes.editor}>
+            <EditorComponent
               content={editingContent}
               onContentChange={onContentChange}
               classes={classes}
               { ...rest }
             />
-          )}
-        </div>
-        { (!isEditing && !isSaving || showChildren) && children }
+          </div>
+        }
+        { (!showEditor || showChildren) && children }
       </div>
     )
   }

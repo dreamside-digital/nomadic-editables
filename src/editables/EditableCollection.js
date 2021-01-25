@@ -4,7 +4,6 @@ import Button from "common/Button"
 import { ReactComponent as AddIcon } from 'assets/add.svg'
 import { EditablesContext } from "common/EditablesContext";
 
-
 class EditableCollection extends React.Component {
 
   onSaveItem = itemId => item => {

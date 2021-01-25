@@ -1,15 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import Editable from "common/Editable";
-import RichTextEditor from 'editingTools/RichTextEditor'
 
 const EditableParagraph = ({ content, onSave, ...rest}) => {
   const { text } = content;
 
   return (
     <Editable
-      Editor={RichTextEditor}
+      loader={() => import('editingTools/RichTextEditor')}
       onSave={onSave}
       content={{ text: text }}
       { ...rest }

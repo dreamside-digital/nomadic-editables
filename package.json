@@ -5,8 +5,8 @@
   "author": "s-kennedy",
   "license": "MIT",
   "repository": "nomadic-labs/nomadic-editables",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
   "engines": {
     "node": ">=10"
   },
@@ -53,7 +53,6 @@
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-standard": "^4.0.1",
     "gh-pages": "^2.2.0",
-    "global": "^4.4.0",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.2.4",
     "prettier": "^2.0.4",
@@ -63,7 +62,6 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.35.1",
     "rollup-plugin-includepaths": "^0.2.4",
-    "rollup-plugin-inject": "^3.0.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-terser": "^7.0.2"

@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import Editable from "common/Editable";
-import EmbeddedIframeEditor from "editingTools/EmbeddedIframeEditor";
 import { makeStylesWithTheme } from 'common/EditablesContext'
 
 const useStyles = makeStylesWithTheme(theme => ({
@@ -30,7 +28,7 @@ const EmbeddedIframe = ({ content, onSave, ...props }) => {
 
   return (
     <Editable
-      Editor={EmbeddedIframeEditor}
+      loader={() => import("editingTools/EmbeddedIframeEditor")}
       onSave={onSave}
       content={{ src: src }}
       {...props}

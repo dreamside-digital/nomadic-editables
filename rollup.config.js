@@ -8,34 +8,25 @@ import url from '@rollup/plugin-url'
 import svgr from '@svgr/rollup'
 import { terser } from 'rollup-plugin-terser'
 import includePaths from 'rollup-plugin-includepaths'
-import inject from 'rollup-plugin-inject'
-
-import pkg from './package.json'
 
 export default {
   input: 'src/index.js',
   output: [
     {
-      file: pkg.module,
+      dir: 'dist/es',
       format: 'es',
       sourcemap: true,
-      inlineDynamicImports: true,
     },
     {
-      file: pkg.main,
+      dir: 'dist/cjs',
       format: 'cjs',
       sourcemap: true,
-      inlineDynamicImports: true,
     },
   ],
   plugins: [
     includePaths({
       paths: ["./src"],
       extensions: ['.js', '.json', '.html', '.jsx', '.css']
-    }),
-    inject({
-      include: 'node_modules/react-rte/**',
-      window: 'global/window'
     }),
     postcss({
       plugins: [],

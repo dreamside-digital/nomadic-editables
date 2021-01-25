@@ -1,16 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-import Editable from "../common/Editable";
-import LinkEditor from "../editingTools/LinkEditor";
-
+import Editable from "common/Editable";
 
 const EditableLink = ({ content, onSave, classes, ...props }) => {
   const { link, anchor } = content;
 
   return (
     <Editable
-      Editor={LinkEditor}
+      loader={() => import("editingTools/LinkEditor")}
       onSave={onSave}
       content={{ link, anchor }}
       {...props}
