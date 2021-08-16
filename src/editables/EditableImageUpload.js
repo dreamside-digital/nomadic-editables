@@ -5,6 +5,9 @@ import Editable from "common/Editable";
 import { makeStylesWithTheme } from 'common/EditablesContext'
 
 const useStyles = makeStylesWithTheme(theme => ({
+  figure: {
+    margin: 0
+  },
   image: {
     height: 'auto',
     width: '100%'
@@ -36,7 +39,7 @@ const EditableImageUpload = ({
       mimetypes={'image/*'}
       { ...rest }
     >
-      <figure>
+      <figure className={classes.figure}>
         <img src={filepath} alt={title} className={classes.image} {...imageProps} />
         { caption && <figcaption className={classes.caption} {...captionProps}>{caption}</figcaption> }
       </figure>

@@ -10,6 +10,7 @@ const useStyles = makeStylesWithTheme(theme => ({
     fontFamily: theme.fontFamily,
     fontWeight: 'bold',
     marginBottom: '0.25rem',
+    textAlign: 'left',
   },
   input: {
     padding: '0.25rem',

@@ -32,7 +32,7 @@ const useStyles = makeStylesWithTheme(theme => ({
   }
 }))
 
-const defaultUploadFile =  file => console.log('Implement a Promise to save file and return URL.', file)
+const defaultUploadFile = file => console.log('Implement a Promise to save file and return URL.', file)
 
 const BasicFileInput = ({
   onChange,
@@ -67,6 +67,7 @@ const BasicFileInput = ({
     }
 
     const file = event.target.files[0];
+    console.log({ file })
 
     if (!file) {
       return setLoading(false)
@@ -80,6 +81,9 @@ const BasicFileInput = ({
     try {
       const filepath = await uploadFile(file)
       const filename = file.name
+
+      console.log({filepath})
+      console.log({filename})
 
       setFilename(filename)
       setFilepath(filepath)
@@ -110,7 +114,7 @@ const BasicFileInput = ({
           {label}
         </label>
         { loading && <span className={classes.info}>loading...</span> }
-        { filename && <span className={classes.info}><a href={filepath}>{filename}</a></span> }
+        { filename && <span className={classes.info}><a href={filepath} target="_blank" rel="noreferrer noopener">{filename}</a></span> }
       </div>
       { error && <p className={classes.errorMessage}>{error}</p> }
     </div>

@@ -36,9 +36,9 @@ const useStyles = makeStylesWithTheme(theme => ({
     filter: props.isSaving ? 'blur(3px)' : 'none',
   }),
   editing: {
-    background: 'none !important',
+    backgroundColor: `rgba(255,255,255,0.75)`,
     padding: '0 !important',
-    border: `2px solid ${theme.colors.primary}`
+    border: `2px solid ${theme.colors.primary}`,
   },
   icon: props => ({
     ...theme.icon,
@@ -112,8 +112,8 @@ const Editable = ({ children, content, loader, Editor, onSave, onDelete, showChi
       <div className={`${classes.wrapper} ${isEditing ? classes.editing : ''}`}>
         <div className={classes.actions}>
           <ToggleEditingButton toggleEditing={toggleEditing} isEditing={isEditing} />
-          { isEditing && <SaveButton onSave={handleSave} /> }
           { isEditing && <DeleteButton onDelete={handleDelete} /> }
+          { isEditing && <SaveButton onSave={handleSave} /> }
         </div>
         {
           showEditor &&

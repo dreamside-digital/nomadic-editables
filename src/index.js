@@ -1,50 +1,27 @@
 import React from 'react'
 import './index.module.css'
 
-import {
-  EditablesContext,
-  EditablesProvider,
-  useEditables
-} from 'common/EditablesContext'
+export { default as Editable } from './common/Editable'
+export { EditablesContext, EditablesProvider, useEditables, theme } from './common/EditablesContext'
 
-import Editable from 'common/Editable'
-import EditableText from 'editables/EditableText';
-import EditableParagraph from 'editables/EditableParagraph';
-import EditableTextArea from 'editables/EditableTextArea';
-import EditableNumber from 'editables/EditableNumber';
-import EditableLink from "./editables/EditableLink";
-import EditableImageUpload from "./editables/EditableImageUpload";
-import EditableFileUpload from "./editables/EditableFileUpload";
-import EditableEmbeddedIframe from "./editables/EditableEmbeddedIframe";
-import EditableBackgroundImage from "./editables/EditableBackgroundImage";
+export { default as EditableText } from './editables/EditableText'
+export { default as EditableTextArea } from './editables/EditableTextArea'
+export { default as EditableParagraph } from './editables/EditableParagraph'
+export { default as EditableNumber } from './editables/EditableNumber'
+export { default as EditableLink } from './editables/EditableLink'
+export { default as EditableImageUpload } from './editables/EditableImageUpload'
+export { default as EditableFileUpload } from './editables/EditableFileUpload'
+export { default as EditableEmbeddedIframe } from './editables/EditableEmbeddedIframe'
+export { default as EditableResponsiveIframe } from './editables/EditableResponsiveIframe'
+export { default as EditableBackgroundImage } from './editables/EditableBackgroundImage'
 
-import ImageUploadEditor from "./editingTools/ImageUploadEditor";
-import FileUploadEditor from "./editingTools/FileUploadEditor";
-import LinkEditor from "./editingTools/LinkEditor";
-import NumberEditor from "editingTools/NumberEditor";
-import PlainTextEditor from "editingTools/PlainTextEditor";
-import TextAreaEditor from "editingTools/TextAreaEditor";
-import EmbeddedIframeEditor from "./editingTools/EmbeddedIframeEditor";
+export { default as ImageUploadEditor } from "./editingTools/ImageUploadEditor";
+export { default as FileUploadEditor } from "./editingTools/FileUploadEditor";
+export { default as LinkEditor } from "./editingTools/LinkEditor";
+export { default as NumberEditor } from "editingTools/NumberEditor";
+export { default as PlainTextEditor } from "editingTools/PlainTextEditor";
+// export { default as RichTextEditor} from "editingTools/RichTextEditor";
+export { default as TextAreaEditor} from "editingTools/TextAreaEditor";
+export { default as EmbeddedIframeEditor} from "./editingTools/EmbeddedIframeEditor";
 
-export {
-  Editable,
-  EditablesContext,
-  EditablesProvider,
-  useEditables,
-  EditableText,
-  EditableTextArea,
-  EditableParagraph,
-  EditableNumber,
-  EditableLink,
-  EditableImageUpload,
-  EditableFileUpload,
-  EditableEmbeddedIframe,
-  EditableBackgroundImage,
-  NumberEditor,
-  PlainTextEditor,
-  TextAreaEditor,
-  LinkEditor,
-  FileUploadEditor,
-  ImageUploadEditor,
-  EmbeddedIframeEditor
-}
+export { JssProvider, SheetsRegistry, createGenerateId, ThemeProvider } from 'react-jss'

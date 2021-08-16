@@ -57,9 +57,12 @@ export const theme = {
   }
 };
 
-export const makeStylesWithTheme = makeStyles => createUseStyles(makeStyles(theme));
+export const makeStylesWithTheme = makeStyles => createUseStyles(makeStyles(theme), { link: true });
 
-export const EditablesContext = createContext({ showEditingControls: true, theme: theme });
+export const EditablesContext = createContext({
+  showEditingControls: true,
+  theme
+});
 
 export const EditablesProvider = ({ children, showEditingControls }) => {
   return (

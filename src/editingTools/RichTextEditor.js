@@ -26,20 +26,22 @@ const RichTextEditor = ({ content, onContentChange, placeholder, ...rest }) => {
   }, [text, editorValue])
 
 
-  const onChange = editorValue => {
-    setEditorValue(editorValue)
-    const text = editorValue.toString('html')
+  const onChange = newEditorValue => {
+    setEditorValue(newEditorValue)
+    const text = newEditorValue.toString('html')
     onContentChange({ ...content, text })
   }
+
+  console.log({ text })
 
   if (editorValue) {
     return (
       <div className={classes.input}>
         <TextEditor
+          {...rest}
           value={editorValue}
           onChange={onChange}
           placeholder={placeholder}
-          {...rest}
         />
       </div>
     )
