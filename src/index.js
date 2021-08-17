@@ -20,7 +20,6 @@ export { default as FileUploadEditor } from "./editingTools/FileUploadEditor";
 export { default as LinkEditor } from "./editingTools/LinkEditor";
 export { default as NumberEditor } from "editingTools/NumberEditor";
 export { default as PlainTextEditor } from "editingTools/PlainTextEditor";
-// export { default as RichTextEditor} from "editingTools/RichTextEditor";
 export { default as TextAreaEditor} from "editingTools/TextAreaEditor";
 export { default as EmbeddedIframeEditor} from "./editingTools/EmbeddedIframeEditor";
 

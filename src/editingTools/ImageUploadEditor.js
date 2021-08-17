@@ -103,5 +103,3 @@ ImageUploadEditor.propTypes = {
 
 
 export default ImageUploadEditor;
-
-c3e584
