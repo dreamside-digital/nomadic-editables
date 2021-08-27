@@ -25,20 +25,23 @@ const EmbeddedIframeEditor = ({ content, onContentChange }) => {
     })
   }
 
+  const getIframeAttribute = (attr, string) => {
+    const regex = ` ${attr}=["'](.*?)["']`
+    const match = string.match(regex)
+    if (match) {
+      return match[1]
+    } else {
+      return ''
+    }
+  }
+
   const handleChangeEmbedCode = event => {
     const value = event.currentTarget.value
 
-    const srcRegex = /(?<=src=["']).*?(?=["'])/
-    const src = srcRegex.exec(value) || ''
-
-    const titleRegex = /(?<=title=["']).*?(?=["'])/
-    const title = titleRegex.exec(value) || ''
-
-    const heightRegex = /(?<=height=["']).*?(?=["'])/
-    const height = heightRegex.exec(value) || ''
-
-    const widthRegex = /(?<=width=["']).*?(?=["'])/
-    const width = widthRegex.exec(value) || ''
+    const src = getIframeAttribute('src', value)
+    const title = getIframeAttribute('title', value)
+    const height = getIframeAttribute('height', value)
+    const width = getIframeAttribute('width', value)
 
     onContentChange({
       ...content,
