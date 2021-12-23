@@ -24,11 +24,14 @@ const ResponsiveIframe = ({ content, onSave, ...props }) => {
   const { src, height, width, allowFullScreen, title } = content;
   const classes = useStyles({ height, width })
 
+  console.log("responsive iframe props", props)
+  console.log("responsive iframe content", content)
+
   return (
     <Editable
       loader={() => import("editingTools/EmbeddedIframeEditor")}
       onSave={onSave}
-      content={{ src: src }}
+      content={{ ...content }}
       {...props}
     >
       <div className={classes.iframeContainer}>

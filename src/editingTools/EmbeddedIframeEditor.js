@@ -16,6 +16,8 @@ const EmbeddedIframeEditor = ({ content, onContentChange }) => {
   const classes = useStyles()
   const { src, title, height, width, embedCode } = content
 
+  console.log("iframe editor content", content)
+
   const handleChange = id => event => {
     event.preventDefault()
     event.stopPropagation()
@@ -62,7 +64,6 @@ const EmbeddedIframeEditor = ({ content, onContentChange }) => {
           value={embedCode}
           onChange={handleChangeEmbedCode}
           autoFocus={true}
-          required
         />
       </div>
 

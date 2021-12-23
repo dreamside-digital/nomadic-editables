@@ -30,7 +30,7 @@ const EmbeddedIframe = ({ content, onSave, ...props }) => {
     <Editable
       loader={() => import("editingTools/EmbeddedIframeEditor")}
       onSave={onSave}
-      content={{ src: src }}
+      content={{ ...content }}
       {...props}
     >
       <div className={classes.iframeContainer}>
